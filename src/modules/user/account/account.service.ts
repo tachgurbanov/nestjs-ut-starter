@@ -1,17 +1,18 @@
 import { Injectable } from '@nestjs/common';
-import { IAccountRepository } from './database/account-repository.interface';
-import { Account } from './database/account.entity';
-import { AccountRepository } from './database/account.repository';
-import { CreateAccountDto } from './dtos/create-account.dto';
-import { UpdateAccountDto } from './dtos/update-account.dto';
-import { passwordToHash } from './helpers/password-helper';
+import { compare, genSalt, hash } from 'bcrypt';
+import { IAccountRepository } from './interfaces';
+import { Account } from './entities/account.entity';
+import { AccountRepository } from './account.repository';
+import { CreateAccountDto, UpdateAccountDto } from './dtos';
 
 @Injectable()
 export class AccountService implements IAccountRepository<Account> {
   constructor(private accountRepository: AccountRepository) {}
 
   async create(createAccountDto: CreateAccountDto): Promise<Account> {
-    createAccountDto.password = await passwordToHash(createAccountDto.password);
+    createAccountDto.password = await this.passwordToHash(
+      createAccountDto.password,
+    );
     return await this.accountRepository.create(createAccountDto);
   }
 
@@ -20,7 +21,7 @@ export class AccountService implements IAccountRepository<Account> {
     updateAccountDto: UpdateAccountDto,
   ): Promise<Account> {
     if (updateAccountDto.password) {
-      updateAccountDto.password = await passwordToHash(
+      updateAccountDto.password = await this.passwordToHash(
         updateAccountDto.password,
       );
     }
@@ -37,5 +38,13 @@ export class AccountService implements IAccountRepository<Account> {
 
   async getAll(): Promise<Account[]> {
     return await this.accountRepository.getAll();
+  }
+
+  async passwordToHash(password: string): Promise<string> {
+    return await hash(password, await genSalt(10));
+  }
+
+  async checkPassword(password: string, hash: string): Promise<boolean> {
+    return await compare(password, hash);
   }
 }

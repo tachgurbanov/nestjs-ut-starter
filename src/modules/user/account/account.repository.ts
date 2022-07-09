@@ -1,9 +1,9 @@
-import { IAccountRepository } from './account-repository.interface';
+import { IAccountRepository } from './interfaces';
 import { Inject, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { Account } from './account.entity';
-import { CreateAccountDto } from '../dtos/create-account.dto';
-import { UpdateAccountDto } from '../dtos/update-account.dto';
+import { Account } from './entities/account.entity';
+import { CreateAccountDto } from './dtos';
+import { UpdateAccountDto } from './dtos';
 
 @Injectable()
 export class AccountRepository implements IAccountRepository<Account> {
@@ -32,7 +32,7 @@ export class AccountRepository implements IAccountRepository<Account> {
   async getById(id: number): Promise<Account> {
     return await this.accountRepository
       .createQueryBuilder()
-      .where('user.id = :id', { id: id })
+      .where('account.id = :id', { id: id })
       .getOne();
   }
 

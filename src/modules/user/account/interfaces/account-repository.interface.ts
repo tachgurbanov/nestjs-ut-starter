@@ -1,5 +1,4 @@
-import { CreateAccountDto } from '../dtos/create-account.dto';
-import { UpdateAccountDto } from '../dtos/update-account.dto';
+import { CreateAccountDto, UpdateAccountDto } from '../dtos';
 
 export interface IAccountRepository<T> {
   create(createAccountDto: CreateAccountDto): Promise<T>;

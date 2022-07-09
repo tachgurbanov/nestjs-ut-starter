@@ -6,7 +6,7 @@ export class Account {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ unique: true })
+  @Column()
   email: string;
 
   @Exclude()

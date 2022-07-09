@@ -1,8 +1,8 @@
-import { DatabaseModule } from './../../../database/database.module';
+import { DatabaseModule } from '../../../database/database.module';
 import { Module } from '@nestjs/common';
 import { AccountService } from './account.service';
-import { accountProviders } from './database/account.providers';
-import { AccountRepository } from './database/account.repository';
+import { accountProviders } from './entities/account.providers';
+import { AccountRepository } from './account.repository';
 import { AccountController } from './account.controller';
 
 @Module({

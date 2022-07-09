@@ -6,9 +6,13 @@ export const databaseProviders = [
     provide: 'DATA_SOURCE',
     inject: [ConfigService],
     useFactory: async (configService: ConfigService) => {
+      const dbName =
+        configService.get<string>('NODE_ENV') === 'test'
+          ? configService.get<string>('entities.test.file')
+          : configService.get<string>('entities.development.file');
       const dataSource = new DataSource({
         type: 'better-sqlite3',
-        database: configService.get<string>('database.sqlite.file'),
+        database: dbName,
         entities: [__dirname + '/../**/*.entity{.ts,.js}'],
         synchronize: true,
       });
