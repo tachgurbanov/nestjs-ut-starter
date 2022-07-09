@@ -8,8 +8,9 @@ export const databaseProviders = [
     useFactory: async (configService: ConfigService) => {
       const dbName =
         configService.get<string>('NODE_ENV') === 'test'
-          ? configService.get<string>('entities.test.file')
-          : configService.get<string>('entities.development.file');
+          ? configService.get<string>('database.test.file')
+          : configService.get<string>('database.development.file');
+
       const dataSource = new DataSource({
         type: 'better-sqlite3',
         database: dbName,
