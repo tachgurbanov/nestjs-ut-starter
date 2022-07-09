@@ -82,13 +82,13 @@ describe('AccountController', () => {
     beforeAll(async () => {
       accountsWithoutPassword = [];
       accounts = accountStub(10) as Account[];
-      accounts.forEach(async (account) => {
+      for (const account of accounts) {
         await accountRepository.create(account);
         accountsWithoutPassword.push({
           id: account.id,
           email: account.email,
         });
-      });
+      }
     });
 
     it('return all accounts without password', async () => {
@@ -102,11 +102,11 @@ describe('AccountController', () => {
 
   describe('GetAccountById', () => {
     let account: Account;
-    let accountWithotPassword: any;
+    let accountWithoutPassword: any;
 
     beforeEach(async () => {
       account = accountStub() as Account;
-      accountWithotPassword = { id: account.id, email: account.email };
+      accountWithoutPassword = { id: account.id, email: account.email };
       await accountRepository.create(account);
     });
 
@@ -115,7 +115,7 @@ describe('AccountController', () => {
         '/account/' + account.id.toString(),
       );
       expect(response.status).toBe(200);
-      expect(response.body).toEqual(accountWithotPassword);
+      expect(response.body).toEqual(accountWithoutPassword);
     });
   });
 
