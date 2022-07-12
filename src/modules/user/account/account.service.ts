@@ -1,13 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { compare, genSalt, hash } from 'bcrypt';
-import { IAccountRepository } from './interfaces';
+import { IAccountRepository } from './account-repository.interface';
 import { Account } from './entities/account.entity';
 import { AccountRepository } from './account.repository';
 import { CreateAccountDto, UpdateAccountDto } from './dtos';
+import { Permission } from 'src/modules/authorization/permission/entities/permission.entity';
 
 @Injectable()
 export class AccountService implements IAccountRepository<Account> {
   constructor(private accountRepository: AccountRepository) {}
+
+  async getAllPermissions(id: number): Promise<Permission[]> {
+    return await this.accountRepository.getAllPermissions(id);
+  }
 
   async create(createAccountDto: CreateAccountDto): Promise<Account> {
     createAccountDto.password = await this.passwordToHash(
