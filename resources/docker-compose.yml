@@ -1,0 +1,12 @@
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./multiple-database:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    environment:
+      - POSTGRES_MULTIPLE_DATABASES=nestjs,nestjstest,nestjsdev
+      - POSTGRES_PASSWORD=uzuner
+      - POSTGRES_USER=toprak

@@ -1,10 +1,17 @@
 import { registerAs } from '@nestjs/config';
 
 export default registerAs('database', () => ({
+  user: process.env.POSTGRES_USER,
+  password: process.env.POSTGRES_PASSWORD,
+  host: process.env.POSTGRES_HOST,
+  port: process.env.POSTGRES_PORT,
   test: {
-    file: process.env.DATABASE_TEST_FILE_NAME + '.sqlite3',
+    name: process.env.POSTGRES_DATABASE + 'test',
   },
   development: {
-    file: process.env.DATABASE_DEV_FILE_NAME + '.sqlite3',
+    name: process.env.POSTGRES_DATABASE + 'dev',
+  },
+  production: {
+    name: process.env.POSTGRES_DATABASE,
   },
 }));
