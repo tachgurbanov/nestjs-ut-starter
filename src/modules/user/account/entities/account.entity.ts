@@ -14,6 +14,9 @@ export class Account {
   @Column()
   password: string;
 
+  @Column('bool', { default: 0 })
+  superuser?: boolean;
+
   @OneToMany(() => Role, (role) => role.account, { nullable: true })
   roles: Role[];
 

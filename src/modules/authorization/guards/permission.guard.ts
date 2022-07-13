@@ -20,6 +20,11 @@ export class PermissionsGuard implements CanActivate {
 
     const req = context.switchToHttp().getRequest();
     const account = req.account;
+
+    if (account.superuser === 1) {
+      return true;
+    }
+
     const ability = await this.abilityFactory.createForAccount(account);
 
     return requiredPermissions.every((permission) =>
