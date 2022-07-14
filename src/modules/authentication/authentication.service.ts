@@ -29,10 +29,10 @@ export class AuthenticationService {
     const permissions = await this.accountService.getAllPermissions(account.id);
     const payload = {
       email: account.email,
+      superuser: account.superuser,
+      permissions: permissions,
       sub: {
         id: account.id,
-        superuser: account.superuser,
-        permissions: permissions,
       },
     };
     return {
