@@ -6,6 +6,7 @@ export interface IAccountRepository<T> {
   update(id: number, updateAccountDto: UpdateAccountDto): Promise<T>;
   delete(id: number): Promise<T>;
   getById(id: number): Promise<T>;
+  getByEmail(email: string): Promise<T>;
   getAll(): Promise<T[]>;
   getAllPermissions(id: number): Promise<Permission[]>;
 }

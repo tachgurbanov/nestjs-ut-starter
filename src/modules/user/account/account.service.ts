@@ -10,6 +10,10 @@ import { Permission } from 'src/modules/authorization/permission/entities/permis
 export class AccountService implements IAccountRepository<Account> {
   constructor(private accountRepository: AccountRepository) {}
 
+  async getByEmail(email: string): Promise<Account> {
+    return await this.accountRepository.getByEmail(email);
+  }
+
   async getAllPermissions(id: number): Promise<Permission[]> {
     return await this.accountRepository.getAllPermissions(id);
   }

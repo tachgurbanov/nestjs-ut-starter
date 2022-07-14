@@ -14,9 +14,16 @@ $ cd resources
 $ docker compose up 
 ```
 
+## Generate public and private keys
+
+run command
+```bash
+$ yarn generatekeys
+```
+
 ## Start server
 
-edit .env file then
+edit .env file then run command
 ```bash
 $ yarn start:dev
 ```

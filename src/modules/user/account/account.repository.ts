@@ -49,4 +49,8 @@ export class AccountRepository implements IAccountRepository<Account> {
   async getAll(): Promise<Account[]> {
     return await this.accountRepository.find();
   }
+
+  async getByEmail(email: string): Promise<Account> {
+    return await this.accountRepository.findOne({ where: { email: email } });
+  }
 }
