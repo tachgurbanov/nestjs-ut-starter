@@ -1,4 +1,4 @@
-import { PermissionActionEnum } from './types';
+import { PermissionActionEnum } from './common/types';
 
 export interface CaslPermission {
   action: PermissionActionEnum;

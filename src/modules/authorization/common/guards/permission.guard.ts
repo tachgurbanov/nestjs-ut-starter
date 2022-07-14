@@ -2,8 +2,8 @@ import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { AppAbilityType, RequiredPermissionType } from '../types';
 import { PERMISSION_CHECKER_KEY } from '../decorators/check-permissions.decorator';
-import { CaslAbilityFactory } from '../casl-ability.factory';
-import { JwtStrategy } from '../../authentication/strategies/jwt.strategy';
+import { CaslAbilityFactory } from '../../casl-ability.factory';
+import { JwtStrategy } from '../../../authentication/strategies/jwt.strategy';
 
 @Injectable()
 export class PermissionsGuard implements CanActivate {

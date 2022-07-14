@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 import { Subject } from '../../subject/entities/subject.entity';
 import { Role } from '../../role/entities/role.entity';
-import { PermissionActionEnum } from '../../types';
+import { PermissionActionEnum } from '../../common/types';
 
 @Entity()
 export class Permission {

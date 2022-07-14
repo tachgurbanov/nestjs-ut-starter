@@ -4,7 +4,7 @@ import { PermissionModule } from './permission/permission.module';
 import { SubjectModule } from './subject/subject.module';
 import { AccountModule } from '../user/account/account.module';
 import { CaslAbilityFactory } from './casl-ability.factory';
-import { PermissionsGuard } from './guards/permission.guard';
+import { PermissionsGuard } from './common/guards/permission.guard';
 
 @Global()
 @Module({

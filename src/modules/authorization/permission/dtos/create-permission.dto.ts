@@ -1,5 +1,5 @@
 import { IsEnum } from 'class-validator';
-import { PermissionActionEnum } from '../../types';
+import { PermissionActionEnum } from '../../common/types';
 
 export class CreatePermissionDto {
   @IsEnum(PermissionActionEnum)

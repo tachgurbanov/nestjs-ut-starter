@@ -3,7 +3,7 @@ import {
   AppAbilityType,
   PermissionActionEnum,
   PermissionObjectType,
-} from './types';
+} from './common/types';
 import { Permission } from './permission/entities/permission.entity';
 import { CaslPermission } from './casl-permission.interface';
 import { Ability } from '@casl/ability';
