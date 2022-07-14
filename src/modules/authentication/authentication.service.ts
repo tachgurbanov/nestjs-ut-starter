@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { AccountService } from '../user/account/account.service';
 import { JwtService, JwtSignOptions } from '@nestjs/jwt';
 import { Account } from '../user/account/entities/account.entity';
+import { LoginDto } from './dto/login.dto';
 
 @Injectable()
 export class AuthenticationService {
@@ -10,10 +11,10 @@ export class AuthenticationService {
     private jwtService: JwtService,
   ) {}
 
-  async validateAccount(email: string, pass: string): Promise<any> {
-    const account = await this.accountService.getByEmail(email);
+  async validateAccount(loginDto: LoginDto): Promise<any> {
+    const account = await this.accountService.getByEmail(loginDto.email);
     const compare = await this.accountService.checkPassword(
-      pass,
+      loginDto.password,
       account.password,
     );
 
