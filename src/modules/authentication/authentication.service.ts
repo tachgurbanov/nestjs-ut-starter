@@ -25,7 +25,15 @@ export class AuthenticationService {
   }
 
   async generateToken(account: Account, signOptions: JwtSignOptions = {}) {
-    const payload = { email: account.email, sub: account.id };
+    const permissions = await this.accountService.getAllPermissions(account.id);
+    const payload = {
+      email: account.email,
+      sub: {
+        id: account.id,
+        superuser: account.superuser,
+        permissions: permissions,
+      },
+    };
     return {
       access_token: this.jwtService.sign(payload, signOptions),
     };

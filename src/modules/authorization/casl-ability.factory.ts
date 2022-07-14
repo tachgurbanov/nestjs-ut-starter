@@ -1,6 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { AccountRepository } from '../user/account/account.repository';
-import { Account } from '../user/account/entities/account.entity';
 import {
   AppAbilityType,
   PermissionActionEnum,
@@ -12,12 +10,8 @@ import { Ability } from '@casl/ability';
 
 @Injectable()
 export class CaslAbilityFactory {
-  constructor(private accountRepository: AccountRepository) {}
-
-  async createForAccount(account: Account): Promise<AppAbilityType> {
-    const dbPermissions: Permission[] =
-      await this.accountRepository.getAllPermissions(account.id);
-    const caslPermissions: CaslPermission[] = dbPermissions.map((p) => ({
+  async createForAccount(permissions: Permission[]): Promise<AppAbilityType> {
+    const caslPermissions: CaslPermission[] = permissions.map((p) => ({
       action: p.action,
       subject: p.subject.name,
     }));
